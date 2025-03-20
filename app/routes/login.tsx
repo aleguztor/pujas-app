@@ -1,7 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { redirect } from "@remix-run/react";
+import { authenticator } from "@/service/auth.server";
+import { commitSession, getSession } from "@/session";
+import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
+import { Form } from "@remix-run/react";
+export let loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
 
+  if (session.has("token")) {
+    return redirect("/home");
+  }
+
+  const data = { error: session.get("error") };
+
+  return Response.json(data, {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  });
+};
 export default function Login() {
   return (
     <>
@@ -33,15 +50,40 @@ export default function Login() {
               <Button type="submit">Entrar</Button>
             </div>
           </form>
-          <div className="p-2">
-            <Button variant={"secondary"}>Iniciar sesión con gmail</Button>
-          </div>
+          <Form method="post">
+            <button>Login with GitHub</button>
+          </Form>
         </section>
       </div>
     </>
   );
 }
 
-export const action = async () => {
-  return redirect("/");
+export const action: ActionFunction = async ({ request }) => {
+  const tokenUser = await authenticator.authenticate("github", request);
+
+  try {
+    const session = await getSession(request.headers.get("Cookie"));
+    if (tokenUser == null) {
+      session.flash("error", "Invalid username/password");
+
+      // Redirect back to the login page with errors.
+      return redirect("/login", {
+        headers: {
+          "Set-Cookie": await commitSession(session),
+        },
+      });
+    }
+    session.set("token", tokenUser);
+    return redirect("/", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    });
+  } catch (error) {
+    console.error("Error durante la autenticación de GitHub:", error);
+    return new Response("Hubo un error en el proceso de autenticación", {
+      status: 500,
+    });
+  }
 };
