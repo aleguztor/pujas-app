@@ -10,7 +10,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Home() {
   return (
     <>
-      <header className="h-[50px]  bg-primary flex  justify-between pl-5 pr-5 items-center shadow-xl">
+      <header className="bg-primary flex h-[50px] items-center justify-between pr-5 pl-5 shadow-xl">
         <div>
           <h3 className="text-white">Pújame</h3>
         </div>
@@ -20,12 +20,12 @@ export default function Home() {
           </Link>
         </div>
       </header>
-      <main className="flex justify-center items-center p-10">
+      <main className="flex items-center justify-center p-10">
         <div className="max-w-7xl">
           <Outlet />
         </div>
       </main>
-      <footer className="h-[150px] flex justify-center items-center ">
+      <footer className="flex h-[150px] items-center justify-center">
         <p>Created by Alejandro G</p>
       </footer>
     </>

@@ -38,7 +38,7 @@ export default function Pujas() {
   const pujas = useLoaderData<PujaResponse[]>();
   return (
     <>
-      <h1 className="text-center mb-5">Pujas page</h1>
+      <h1 className="mb-5 text-center">Pujas page</h1>
 
       <section className="grid grid-cols-3 gap-5 max-xl:grid-cols-2 max-md:grid-cols-1">
         {pujas.map((puja) => (

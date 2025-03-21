@@ -11,13 +11,13 @@ export let loader: LoaderFunction = async ({ request }) => {
 export default function Login() {
   return (
     <>
-      <div className="flex items-center center w-full justify-center h-full">
-        <section className="bg-amber-400 flex items-center justify-center w-[65%] shadow-2xl h-screen max-md:hidden ">
+      <div className="center flex h-full w-full items-center justify-center">
+        <section className="flex h-screen w-[65%] items-center justify-center bg-amber-400 shadow-2xl max-md:hidden">
           <h1>Pújame</h1>
         </section>
-        <section className="flex items-center justify-center flex-col w-[35%]">
+        <section className="flex w-[35%] flex-col items-center justify-center">
           <h3 className="p-4">Inicio de sesión</h3>
-          <form className="flex items-center  center flex-col gap-5 w-fit" action="" method="post">
+          <form className="center flex w-fit flex-col items-center gap-5" action="" method="post">
             <div>
               <label htmlFor="username"></label>
               <Input type="text" placeholder="username" />
