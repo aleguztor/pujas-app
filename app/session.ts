@@ -1,6 +1,9 @@
 import { createCookieSessionStorage } from "@remix-run/node"; // or cloudflare/deno
+import { GithubProfile } from "./service/auth";
 
 type SessionData = {
+  user: GithubProfile;
+  refreshToken: string;
   token: string;
 };
 

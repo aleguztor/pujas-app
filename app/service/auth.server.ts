@@ -1,7 +1,8 @@
 import { Authenticator } from "remix-auth";
 import { GitHubStrategy } from "remix-auth-github";
+import { getGithubProfile, GithubProfile } from "./auth";
 
-const authenticator = new Authenticator<string>();
+const authenticator = new Authenticator<GithubProfile>();
 
 const gitHubStrategy = new GitHubStrategy(
   {
@@ -10,7 +11,7 @@ const gitHubStrategy = new GitHubStrategy(
     redirectURI: "http://localhost:5174/auth/github/callback",
   },
   async ({ tokens }) => {
-    return await tokens.accessToken();
+    return await getGithubProfile(tokens.accessToken());
   }
 );
 

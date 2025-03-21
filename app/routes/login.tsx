@@ -2,22 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { authenticator } from "@/service/auth.server";
 import { commitSession, getSession } from "@/session";
+import { isAuthLoginPage } from "@/utils/cookies";
 import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 export let loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-
-  if (session.has("token")) {
-    return redirect("/home");
-  }
-
-  const data = { error: session.get("error") };
-
-  return Response.json(data, {
-    headers: {
-      "Set-Cookie": await commitSession(session),
-    },
-  });
+  return await isAuthLoginPage(request);
 };
 export default function Login() {
   return (
@@ -60,11 +49,11 @@ export default function Login() {
 }
 
 export const action: ActionFunction = async ({ request }) => {
-  const tokenUser = await authenticator.authenticate("github", request);
+  const user = await authenticator.authenticate("github", request);
 
   try {
     const session = await getSession(request.headers.get("Cookie"));
-    if (tokenUser == null) {
+    if (user == null) {
       session.flash("error", "Invalid username/password");
 
       // Redirect back to the login page with errors.
@@ -74,8 +63,8 @@ export const action: ActionFunction = async ({ request }) => {
         },
       });
     }
-    session.set("token", tokenUser);
-    return redirect("/", {
+    session.set("user", user);
+    return redirect("/home", {
       headers: {
         "Set-Cookie": await commitSession(session),
       },

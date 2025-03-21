@@ -4,9 +4,9 @@ import { LoaderFunction, redirect } from "@remix-run/node";
 
 export let loader: LoaderFunction = async ({ request }) => {
   try {
-    let tokenUser = await authenticator.authenticate("github", request);
+    let user = await authenticator.authenticate("github", request);
     const session = await getSession();
-    if (tokenUser == null) {
+    if (user == null) {
       session.flash("error", "Invalid username/password");
 
       // Redirect back to the login page with errors.
@@ -16,9 +16,9 @@ export let loader: LoaderFunction = async ({ request }) => {
         },
       });
     }
-    session.set("token", tokenUser);
+    session.set("user", user);
 
-    return redirect("/home", {
+    return redirect("/home/pujas", {
       headers: {
         "Set-Cookie": await commitSession(session),
       },

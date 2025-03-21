@@ -1,15 +1,11 @@
 import { buttonVariants } from "@/components/ui/button";
-import { commitSession, getSession } from "@/session";
-import { LoaderFunction } from "@remix-run/node";
+import { isAuthPages } from "@/utils/cookies";
+import { LoaderFunction, redirect } from "@remix-run/node";
 import { Link, Outlet } from "@remix-run/react";
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const data = { error: session.get("error") };
-  return Response.json(data, {
-    headers: {
-      "Set-Cookie": await commitSession(session),
-    },
-  });
+  const { response } = await isAuthPages(request);
+
+  return response;
 };
 export default function Home() {
   return (

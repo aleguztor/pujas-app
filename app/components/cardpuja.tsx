@@ -1,7 +1,6 @@
 import { PujaResponse } from "@/routes/home.pujas";
-import { redirect, useNavigate } from "@remix-run/react";
-import { useState } from "react";
-import { Button } from "./ui/button";
+import { useNavigate } from "@remix-run/react";
+
 import {
   Card,
   CardContent,
