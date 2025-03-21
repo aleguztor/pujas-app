@@ -1,8 +1,8 @@
-import CardPuja from "@/components/cardpuja";
-import { prisma } from "@/utils/db.server";
-import { mockPujas } from "@/utils/mocks/pujas";
-import { useLoaderData } from "@remix-run/react";
-import { format } from "date-fns";
+import CardPuja from '@/components/cardpuja';
+import { prisma } from '@/utils/db.server';
+import { mockPujas } from '@/utils/mocks/pujas';
+import { useLoaderData } from '@remix-run/react';
+import { format } from 'date-fns';
 
 export interface PujaResponse {
   createdBy: {
@@ -27,8 +27,8 @@ export async function loader() {
   });
   const formattedPujas: PujaResponse[] = pujas.map((puja) => ({
     ...puja,
-    finalDate: format(new Date(puja.finalDate), "dd/MM/yyyy"), // Formato de fecha 'día/mes/año'
-    startDate: format(new Date(puja.startDate), "dd/MM/yyyy"), // Formato de fecha 'día/mes/año'
+    finalDate: format(new Date(puja.finalDate), 'dd/MM/yyyy'), // Formato de fecha 'día/mes/año'
+    startDate: format(new Date(puja.startDate), 'dd/MM/yyyy'), // Formato de fecha 'día/mes/año'
   }));
 
   return Response.json(formattedPujas.length > 0 ? formattedPujas : mockPujas);
@@ -42,10 +42,7 @@ export default function Pujas() {
 
       <section className="grid grid-cols-3 gap-5 max-xl:grid-cols-2 max-md:grid-cols-1">
         {pujas.map((puja) => (
-          <CardPuja
-            key={puja.id}
-            puja={puja}
-          />
+          <CardPuja key={puja.id} puja={puja} />
         ))}
       </section>
     </>

@@ -48,11 +48,11 @@ export interface Plan {
 }
 
 export async function getGithubProfile(accesToken: string) {
-  const response = await fetch("https://api.github.com/user", {
+  const response = await fetch('https://api.github.com/user', {
     headers: {
-      Accept: "application/vnd.github+json",
+      Accept: 'application/vnd.github+json',
       Authorization: `Bearer ${accesToken}`,
-      "X-GitHub-Api-Version": "2022-11-28",
+      'X-GitHub-Api-Version': '2022-11-28',
     },
   });
 

@@ -1,7 +1,7 @@
-import { buttonVariants } from "@/components/ui/button";
-import { isAuthPages } from "@/utils/cookies";
-import { LoaderFunction, redirect } from "@remix-run/node";
-import { Link, Outlet } from "@remix-run/react";
+import { buttonVariants } from '@/components/ui/button';
+import { isAuthPages } from '@/utils/cookies';
+import { LoaderFunction, redirect } from '@remix-run/node';
+import { Link, Outlet } from '@remix-run/react';
 export const loader: LoaderFunction = async ({ request }) => {
   const { response } = await isAuthPages(request);
 
@@ -16,8 +16,9 @@ export default function Home() {
         </div>
         <div className="flex gap-0.5">
           <Link
-            to={"/usuario"}
-            className={buttonVariants({ variant: "outline" })}>
+            to={'/perfil'}
+            className={buttonVariants({ variant: 'outline' })}
+          >
             Usuario
           </Link>
         </div>

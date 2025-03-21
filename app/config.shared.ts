@@ -1,4 +1,4 @@
-export const APP_NAME = "Pujas";
+export const APP_NAME = 'Pujas';
 
 export function title(pageTitle?: string) {
   if (!pageTitle) return APP_NAME;

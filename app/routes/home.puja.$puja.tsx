@@ -1,5 +1,5 @@
-import { useLocation } from "@remix-run/react";
-import { PujaResponse } from "./home.pujas";
+import { useLocation } from '@remix-run/react';
+import { PujaResponse } from './home.pujas';
 
 export default function Puja() {
   const location = useLocation();
