@@ -15,10 +15,7 @@ export default function Home() {
           <h3 className="text-white">Pújame</h3>
         </div>
         <div className="flex gap-0.5">
-          <Link
-            to={'/perfil'}
-            className={buttonVariants({ variant: 'outline' })}
-          >
+          <Link to={'/perfil'} className={buttonVariants({ variant: 'outline' })}>
             Usuario
           </Link>
         </div>

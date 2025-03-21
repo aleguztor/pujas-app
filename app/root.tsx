@@ -1,11 +1,5 @@
 import { LinksFunction } from '@remix-run/node';
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 import { ThemeSwitcherSafeHTML } from './components/theme-switcher';
 import styles from './globals.css?url';
 

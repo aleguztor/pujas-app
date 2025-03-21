@@ -12,7 +12,7 @@ const gitHubStrategy = new GitHubStrategy(
   },
   async ({ tokens }) => {
     return await getGithubProfile(tokens.accessToken());
-  },
+  }
 );
 
 authenticator.use(gitHubStrategy);

@@ -17,11 +17,7 @@ export default function Login() {
         </section>
         <section className="flex items-center justify-center flex-col w-[35%]">
           <h3 className="p-4">Inicio de sesión</h3>
-          <form
-            className="flex items-center  center flex-col gap-5 w-fit"
-            action=""
-            method="post"
-          >
+          <form className="flex items-center  center flex-col gap-5 w-fit" action="" method="post">
             <div>
               <label htmlFor="username"></label>
               <Input type="text" placeholder="username" />

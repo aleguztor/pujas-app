@@ -26,9 +26,7 @@ export async function isAuthPages(request: any) {
   };
 }
 
-export async function isAuthLoginPage(
-  request: any,
-): Promise<Response | TypedResponse<never>> {
+export async function isAuthLoginPage(request: any): Promise<Response | TypedResponse<never>> {
   const session = await getSession(request.headers.get('Cookie'));
   if (session.has('user')) {
     return redirect('/home/pujas');
